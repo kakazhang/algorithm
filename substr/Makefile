@@ -1,0 +1,10 @@
+
+SRC := substring.c
+
+BIN := SubString
+
+$(BIN) : $(SRC)
+	@gcc -g $^ -o $@
+
+clean:
+	@rm -r $(BIN)
