@@ -24,4 +24,6 @@ pNode Delete(pTree root, int data);
 void preTraversal(pTree root);
 
 pNode Search(pTree root, int data);
+
+int getLeafCount(pTree root);
 #endif

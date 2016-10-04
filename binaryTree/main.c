@@ -22,6 +22,10 @@ int main() {
       printf("found:%d\n", found->data);
   else 
       printf("not found\n");
+
+  int leaves = getLeafCount(root);
+  printf("leaves:%d\n", leaves);
+
   printf("after delete\n");
   Delete(root, 32);
   preTraversal(root);

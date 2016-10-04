@@ -89,6 +89,16 @@ pNode Delete(pTree root, int data) {
     return root;
 }
 
+int getLeafCount(pTree node) {
+    if (!node)
+        return 0;
+
+    if ((node->left == NULL) && (node->right == NULL))
+        return 1;
+
+    return getLeafCount(node->left) + getLeafCount(node->right);
+}
+
 pNode Search(pTree root, int data) {
     if (!root)
        return NULL;
