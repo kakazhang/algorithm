@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #include "btree.h"
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
 
 pNode allocNode(int data) {
     pNode newNode = (pNode)malloc(sizeof(BTree));
@@ -117,4 +118,14 @@ void preTraversal(pTree root) {
         preTraversal(root->left);
         preTraversal(root->right);
     }
+}
+
+int height(pTree root) {
+    if (!root)
+        return 0;
+
+    int lheight = height(root->left);
+    int rheight = height(root->right);
+
+    return MAX(lheight, rheight) + 1;
 }

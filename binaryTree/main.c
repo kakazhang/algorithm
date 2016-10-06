@@ -17,6 +17,8 @@ int main() {
 
    preTraversal(root);
 
+   printf("height:%d\n", height(root));
+
   pNode found = Search(root, 42);
   if (found)
       printf("found:%d\n", found->data);
@@ -29,5 +31,6 @@ int main() {
   printf("after delete\n");
   Delete(root, 32);
   preTraversal(root);
+  printf("height:%d\n", height(root));
   return 0;
 }

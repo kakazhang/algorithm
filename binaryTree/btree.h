@@ -26,4 +26,6 @@ void preTraversal(pTree root);
 pNode Search(pTree root, int data);
 
 int getLeafCount(pTree root);
+
+int height(pTree root);
 #endif
