@@ -6,8 +6,7 @@
  ************************************************************************/
 
 #include<stdio.h>
-
-
+#if 0
 int count_bits(int a) {
     int count = 0;
 
@@ -18,6 +17,17 @@ int count_bits(int a) {
 
     return count;
 }
+#else
+int count_bits(int a) {
+    int count = 0;
+    while (a) {
+        a &= (a-1);
+        count++;
+    }
+
+    return count;
+}
+#endif
 
 int count_transfer_bits(int a, int b) {
     int c = a ^ b;
