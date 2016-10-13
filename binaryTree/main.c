@@ -15,7 +15,9 @@ int main() {
    Insert(root, 40);
    Insert(root, 5);
 
-   preTraversal(root);
+   inOrderTraversal(root);
+    
+   printf("isBST:%d\n", isBST(root));
 
    printf("height:%d\n", height(root));
 

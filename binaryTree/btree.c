@@ -120,6 +120,14 @@ void preTraversal(pTree root) {
     }
 }
 
+void inOrderTraversal(pTree root) {
+    if (root) {
+        inOrderTraversal(root->left);
+        printf("%d\n", root->data);
+        inOrderTraversal(root->right);
+    }
+}
+
 int height(pTree root) {
     if (!root)
         return 0;
@@ -128,4 +136,21 @@ int height(pTree root) {
     int rheight = height(root->right);
 
     return MAX(lheight, rheight) + 1;
+}
+
+int isBST(pTree root) {
+    static pTree prev = NULL;
+
+    if (!root)
+        return 1;
+
+    if (!isBST(root->left))
+        return 0;
+
+    if (prev && root->data < prev->data)
+        return 0;
+
+    prev = root;
+
+    return isBST(root->right);
 }

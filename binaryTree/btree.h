@@ -23,9 +23,13 @@ pNode Delete(pTree root, int data);
 
 void preTraversal(pTree root);
 
+void inOrderTraversal(pTree root);
+
 pNode Search(pTree root, int data);
 
 int getLeafCount(pTree root);
 
 int height(pTree root);
+
+int isBST(pTree root);
 #endif
