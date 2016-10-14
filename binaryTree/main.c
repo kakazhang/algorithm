@@ -31,8 +31,8 @@ int main() {
   printf("leaves:%d\n", leaves);
 
   printf("after delete\n");
-  Delete(root, 32);
-  preTraversal(root);
+  Delete(root, 45);
+  inOrderTraversal(root);
   printf("height:%d\n", height(root));
   return 0;
 }

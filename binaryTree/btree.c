@@ -70,18 +70,17 @@ pNode Delete(pTree root, int data) {
         root->right = Delete(root->right, data);
     } else {
         if (root->left && root->right) {
-            tmp = FindMin(root->left);
+            tmp = FindMin(root->right);
             root->data = tmp->data;
 
-            root->left = Delete(root->left, tmp->data);
+            root->right = Delete(root->right, tmp->data);
         } else {
             tmp = root;
               
-            if (root->left) 
-                root = root->left;
-            
-            if (root->right)
+            if (root->left == NULL) 
                 root = root->right;
+            else if (root->right == NULL)
+                root = root->left;
             
             free(tmp);
         }
