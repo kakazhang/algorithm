@@ -8,6 +8,13 @@
 #include <stdlib.h>
 
 #define max(a,b) ( (a) > (b) ? (a) : (b))
+/*
+*@str: the string to find panlindrome in 
+*@ l : the left start index of str 
+*@ r : the right end index of str
+*
+* return number of longest panlindrom substring
+*/
 
 int lps(const char* str, int l, int r) {
     if (l == r)
