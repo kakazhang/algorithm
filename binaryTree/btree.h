@@ -7,6 +7,11 @@
 
 #ifndef _BTREE_H
 #define _BTREE_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct BTree {
     int data;
     struct BTree *left;
@@ -32,4 +37,8 @@ int getLeafCount(pTree root);
 int height(pTree root);
 
 int isBST(pTree root);
+
+#ifdef __cplusplus
+}
+#endif
 #endif
