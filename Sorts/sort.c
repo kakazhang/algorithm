@@ -28,3 +28,21 @@ void shellSort(int arr[], int len) {
         }
     }
 }
+
+//Bubble sort
+void swap(int *a, int *b) {
+    *a = *a + *b;
+    *b = *a - *b;
+    *a = *a - *b;
+}
+
+void bubble(int arr[], int N) {
+    int i, j;
+
+    for (i = 0; i < N-1; i++) {
+        for (j = i+1; j < N; j++) {
+            if (arr[j] < arr[i])
+                swap(&arr[i], &arr[j]);
+        }
+    }
+}
