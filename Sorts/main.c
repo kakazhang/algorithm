@@ -3,6 +3,7 @@
 extern void insertionSort(int arr[], int len);
 extern void shellSort(int arr[], int len);
 extern void bubble(int arr[], int len);
+extern void MergeSort(int arr[], int len);
 
 void show(int arr[], int len) {
     int i;
@@ -21,9 +22,10 @@ int main() {
     //insertionSort(arr, len);
     //show(arr, len);
     
-    printf("shellSort:\n");
+    printf("Sort:\n");
     //shellSort(arr, len);
-    bubble(arr, len);
+    //bubble(arr, len);
+    MergeSort(arr, len);
     show(arr, len);
     
     return 0;
