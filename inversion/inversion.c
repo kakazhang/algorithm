@@ -14,7 +14,7 @@ int Merge(int arr[], int tmpArr[], int lstart, int rstart, int rend) {
             tmpArr[tmp++] = arr[lstart++];
         } else {
             tmpArr[tmp++] = arr[rstart++];
-            inv += (lend - lstart);
+            inv += (lend - lstart + 1);
         }
     }
 
@@ -69,14 +69,29 @@ void show(int arr[], int len) {
     printf("\n");
 }
 
+//simple way to get inversions 
+int inversions(int arr[], int len) {
+    int i, j;
+    int inv = 0;
+    for (i = 0; i < len; i++) {
+        for (j = i+1; j < len; j++) {
+            if (arr[i] > arr[j])
+                inv++;
+        }
+    }
+
+    return inv;
+}
+
 int main() {
     int arr[] = {1, 20, 6, 4, 5};
     int len = sizeof(arr)/sizeof(arr[0]);
 
     show(arr, len);
-    int inv = MergeSort(arr, len);
+    int inv_simple = inversions(arr, len);
+    int inv_merge = MergeSort(arr, len);
     show(arr, len);
-    printf("inversions:%d\n", inv);
+    printf("simple inversions:%d, merge inversions:%d\n", inv_simple, inv_merge);
 
     return 0;
 }
