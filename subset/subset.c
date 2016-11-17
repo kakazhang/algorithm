@@ -4,7 +4,7 @@ void allSubset(int arr[], int n) {
     int i, j;
 
     for (i = 0; i < (1 << n); i++) {
-       printf("{");
+       printf("{ ");
 
        for (j = 0; j < n; j++) {
            if ( (i & (1 << j)) ) {
