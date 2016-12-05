@@ -12,14 +12,11 @@ do
     fi
 
     cd ${CURR}/${de}
-    
-
     lines=$(wc -l * | grep total | awk '{print $1}')
 
     if [ "x$lines" == "x" ];then
         lines=$(wc -l * | awk '{print $1}')
     fi
-    #echo "$de:$lines"
     count=$((count+lines))
     cd $CURR
 done
