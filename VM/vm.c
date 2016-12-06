@@ -13,12 +13,14 @@ typedef struct object {
    Type type;
 
    union {
-       struct object* lchild;
-	   struct object* rchild;
-
-	   int val;
+       struct {
+            struct object* lchild;
+			struct object* rchild;
+       };
+       int val;
    }ele;
 
+   int marked;
    struct object* next;
 }Object, *pObject;
 
@@ -41,6 +43,7 @@ static pObject alloc(Type type) {
     pObject obj = (pObject)malloc(sizeof(Object));
 	assert((obj != NULL), "no space for object");
 
+	obj->marked = 0;
 	obj->type = type;
 	obj->next = NULL;
 	
@@ -67,8 +70,12 @@ void push(pVM vm, int val) {
 
 	pObject obj = alloc(TYPE_INT);
 	obj->ele.val = val;
-    obj->next = vm->root;
-	vm->root = obj;
+	if (vm->root == NULL) {
+		vm->root = obj;
+	} else {
+		obj->next = vm->root->next;
+		vm->root->next = obj;
+	}
 
 	vm->objects[vm->count++] = obj;
 }
@@ -114,6 +121,48 @@ void freeAll(pVM vm) {
 	}
 }
 
+void mark(pObject obj) {
+    if (obj && !obj->marked) {
+        if (obj->type == TYPE_INT) {
+           obj->marked = 1;
+        } else {
+           if (obj->ele.lchild)
+              mark(obj->ele.lchild);
+           if (obj->ele.rchild)
+              mark(obj->ele.rchild);
+        }
+	}
+}
+
+void markAll(pVM vm) {
+    int i;
+	for (i = 0; i < vm->count; i++) {
+        mark(vm->objects[i]);
+	}
+}
+
+void sweep(pVM vm) {
+    pObject* obj = &(vm->root);
+    pObject tmp = NULL;
+	while (*obj) {
+        if ((*obj)->marked) {
+             tmp = *obj;
+			 *obj = (*obj)->next;
+
+			 free(tmp);
+			 vm->count--;
+		} else {
+           (*obj)->marked = 0;
+		   (*obj) = (*obj)->next;
+		}
+	}
+}
+
+void markAndSweep(pVM vm) {
+    markAll(vm);
+	sweep(vm);
+}
+
 void show(pVM vm) {
     if (vm) {
         pObject obj = vm->root;
@@ -138,8 +187,14 @@ int main() {
    push(vm, 21);
    push_pair(vm);
    push(vm, 7);
-   
+
+   printf("before sweep\n");
    show(vm);
+   markAndSweep(vm);
+
+   printf("after sweep\n");
+   show(vm);
+
    freeAll(vm);
 
    return 0;
