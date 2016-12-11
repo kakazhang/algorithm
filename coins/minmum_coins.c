@@ -1,3 +1,9 @@
+/**
+*Given an array of coins weight,whose lenght is len
+* for a given weight V, find the minmum number of coins
+* that weight sum equals weight V
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
@@ -23,12 +29,14 @@ int get_minmum_coins(int coins[], int len, int V) {
 	return table[V];
 }
 
+/*
+* int coins[]: an array of coins' weight
+*/
 int main() {
 	int coins[] = {3, 7, 11, 10, 9, 8, 1};
 	int len = sizeof(coins)/sizeof(coins[0]);
 
-	int no_of_coins = get_minmum_coins(coins, len, 10);
-
+	int no_of_coins = get_minmum_coins(coins, len, 20);
 	printf("no of coins:%d\n", no_of_coins);
 	return 0;
 }
