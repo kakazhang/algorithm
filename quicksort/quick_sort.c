@@ -14,13 +14,13 @@ void swap(int *a, int *b) {
 }
 
 int partition(int arr[], int left, int right, int pivot) {
-    int store_index = 0;
+    int store_index = left;
     int i;
     int val = arr[pivot];
     
     swap(&arr[pivot], &arr[right]);
 
-    for (i = 0; i < right; i++) {
+    for (i = left; i < right; i++) {
         if (arr[i] < val) {
             swap(&arr[store_index++], &arr[i]);
         }
