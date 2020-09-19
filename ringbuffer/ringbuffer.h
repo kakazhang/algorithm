@@ -4,6 +4,9 @@
 typedef unsigned int uint32_t;
 typedef unsigned char bool;
 
+#define MIN(a, b) ((a) > (b) ? (b) : (a))
+#define CACHELINE 32 * 1024
+
 typedef struct ring_buffer {
     void *base;
     uint32_t size;
