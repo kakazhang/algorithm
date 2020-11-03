@@ -14,7 +14,7 @@ public:
         for (i = 0; i < nums.size(); i++) {
             if (a.count(target-nums[i]) > 0) {
                 b[0] = i;
-                b[1] = a.count(target-nums[i]);
+                b[1] = a[target-nums[i]];
                 break;
             }
             a[nums[i]] = i;
@@ -25,10 +25,10 @@ public:
 
 int main() {
    Solution s;
-   vector<int> a;
+   vector<int> a(4, -1);
    int array[] = {2, 7, 9, 10};
 
-   for (int i = 0; i < sizeof(array)/sizeof(array[0]); i++)
+   for (int i = 0; i < 4; i++)
        a[i] = array[i];
 
    vector<int> b = s.twoSum(a, 9);
