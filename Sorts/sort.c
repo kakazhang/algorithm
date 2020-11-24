@@ -17,7 +17,7 @@ void insertionSort(int arr[], int len) {
 void shellSort(int arr[], int len) {
     int i, j;
     int increment;
-    
+
     for (increment = len/2; increment > 0; increment--) {
         for (i = increment; i < len; i++) {
             int tmp = arr[i];
@@ -46,7 +46,7 @@ void bubble(int arr[], int N) {
         }
     }
 }
-
+#ifdef MERGE_ITERACTE
 void Merge(int arr[], int tmpArr[], int lStart, int rStart, int rEnd) {
     int len = rEnd - lStart + 1;
     int lEnd = rStart - 1;
@@ -98,3 +98,53 @@ void MergeSort(int arr[], int len) {
 
     free(tmpArr);
 }
+#else
+int min(int a, int b)
+{
+    return a < b ? a : b;
+}
+
+void MergeSort(int arr[], int len)
+{
+    int seg, start;
+
+    int *a = arr;
+    int *b = (int *)malloc(sizeof(int) * len);
+
+    for (seg = 1; seg < len; seg += seg) {
+        int k = 0;
+        for (start = 0; start < len; start += 2*seg) {
+            int low = start;
+            int mid = min(start + seg, len);
+            int high = min(start + 2*seg, len);
+
+            int start1 = low;
+            int end1 = mid;
+            int start2 = mid;
+            int end2 = high;
+
+            while (start1 < end1 && start2 < end2) {
+                b[k++] = a[start1] < a[start2] ? a[start1++] : a[start2++];
+            }
+
+            while (start1 < end1)
+                b[k++] = a[start1++];
+            while (start2 < end2)
+                b[k++] = a[start2++];
+        }
+        int *tmp = a;
+        a = b;
+        b = tmp;
+    }
+
+    int i = 0;
+    if (a != arr) {
+        while (i < len) {
+            b[i] = a[i];
+            i++;
+        }
+        b = a;
+    }
+    free(b);
+}
+#endif

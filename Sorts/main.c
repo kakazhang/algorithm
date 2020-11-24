@@ -21,12 +21,12 @@ int main() {
     //printf("insertionSort:\n");
     //insertionSort(arr, len);
     //show(arr, len);
-    
+
     printf("Sort:\n");
     //shellSort(arr, len);
     //bubble(arr, len);
     MergeSort(arr, len);
     show(arr, len);
-    
+
     return 0;
 }
