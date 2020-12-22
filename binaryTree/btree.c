@@ -22,7 +22,7 @@ pNode FindMin(pTree root) {
     //check illegal input argument
     if (!root)
         return NULL;
-    
+
     pNode n = root;
     while (n && n->left) {
         n = n->left;
@@ -48,14 +48,14 @@ pNode Insert(pTree root, int data) {
     if (!root) {
         root = allocNode(data);
         return root;
-    }   
+    }
 
     if (data < root->data) {
         root->left = Insert(root->left, data);
     } else if (data > root->data) {
         root->right = Insert(root->right, data);
     }
-    
+
     return root;
 }
 
@@ -76,12 +76,12 @@ pNode Delete(pTree root, int data) {
             root->right = Delete(root->right, tmp->data);
         } else {
             tmp = root;
-              
-            if (root->left == NULL) 
+
+            if (root->left == NULL)
                 root = root->right;
             else if (root->right == NULL)
                 root = root->left;
-            
+
             free(tmp);
         }
     }
@@ -89,7 +89,7 @@ pNode Delete(pTree root, int data) {
     return root;
 }
 
-#if 1 
+#if 1
 int getLeafCount(pTree node) {
     if (!node)
         return 0;
@@ -99,7 +99,7 @@ int getLeafCount(pTree node) {
 
     return getLeafCount(node->left) + getLeafCount(node->right);
 }
-#else 
+#else
 int getLeafCount(pTree node) {
     static int count = 0;
     if (!node)
@@ -118,7 +118,7 @@ pNode Search(pTree root, int data) {
     if (!root)
        return NULL;
 
-    if (data < root->data) 
+    if (data < root->data)
         return  Search(root->left, data);
     else if (data > root->data)
         return  Search(root->right, data);

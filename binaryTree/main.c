@@ -5,7 +5,7 @@
 
 int main() {
    pTree root = NULL;
-   
+
    root = Insert(root, 30);
    Insert(root, 19);
    Insert(root, 45);
@@ -16,7 +16,7 @@ int main() {
    Insert(root, 5);
 
    inOrderTraversal(root);
-    
+
    printf("isBST:%d\n", isBST(root));
 
    printf("height:%d\n", height(root));
@@ -24,7 +24,7 @@ int main() {
   pNode found = Search(root, 42);
   if (found)
       printf("found:%d\n", found->data);
-  else 
+  else
       printf("not found\n");
 
   int leaves = getLeafCount(root);
