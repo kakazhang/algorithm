@@ -48,7 +48,7 @@ static void* get_shm_addr(uint32_t size)
 
 ring_buffer_t ring_buffer_create(uint32_t size)
 {
-    //size = roundup_pow_of_two(size);
+    size = roundup_pow_of_two(size);
     size = (size + ALIGN_SIZE) & ~(ALIGN_SIZE-1);
 #ifndef USE_SHM
     void* addr = calloc(1, size+sizeof(ring_buffer));
@@ -105,8 +105,8 @@ uint32_t ring_buffer_read(ring_buffer_t rb, void* buf, uint32_t count)
         memcpy(buf+len, rb->base, count-len);
 
     rb->head = (rb->head + count) % size;
-    if (rb->head == size)
-        rb->head = 0;
+    //if (rb->head == size)
+    //    rb->head = 0;
     return count;
 }
 
@@ -117,7 +117,7 @@ uint32_t ring_buffer_write(ring_buffer_t rb, void* buf, uint32_t count)
     uint32_t tail = rb->tail;
     uint32_t used = ring_buffer_used(rb);
 
-    if (count > (size-used)) {
+    if (count >= (size-used)) {
         //printf("No enough space to write, current size:%d\n", (size-used));
         return 0;
     }
@@ -128,8 +128,8 @@ uint32_t ring_buffer_write(ring_buffer_t rb, void* buf, uint32_t count)
         memcpy(rb->base, buf+len, count-len);
 
     rb->tail = ((rb->tail + count) % size);
-    if (rb->tail == size)
-        rb->tail = 0;
+    //if (rb->tail == size)
+    //    rb->tail = 0;
     return count;
 }
 

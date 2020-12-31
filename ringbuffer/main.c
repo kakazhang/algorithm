@@ -12,7 +12,7 @@
 
 #include "ringbuffer.h"
 
-//#define TEST_SIZE 1024 * CACHELINE
+#define TEST_SIZE 1024 * CACHELINE
 #define LOOP 100
 double getdetlatimeofday(struct timeval *begin, struct timeval *end)
 {
@@ -57,10 +57,10 @@ void do_consume(ring_buffer_t rb)
         count = MIN(CACHELINE, size-i);
         ret = ring_buffer_read(rb, buf, count);
         if (ret > 0) {
-            i += count;
-            //ret = write(fd, buf, ret);
-            //if (ret < 0)
-            //    perror("write");
+            i += ret;
+            ret = write(fd, buf, ret);
+            if (ret < 0)
+                perror("write");
         }
     }
     printf("read finish, i=%d\n", i);
