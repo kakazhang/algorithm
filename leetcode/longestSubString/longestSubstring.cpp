@@ -12,6 +12,7 @@ class Solution {
         virtual ~Solution() {}
 
         int longestSubstring(string s);
+        int slidewindow(string s);
 };
 
 int Solution::longestSubstring(string s)
@@ -36,12 +37,34 @@ int Solution::longestSubstring(string s)
     return num;
 }
 
+int Solution::slidewindow(string s)
+{
+    int left = 0, right = -1;
+    int m = 0;
+    int len = s.size();
+    unordered_set<int> strs;
+
+    for (; left < len; left++) {
+        if (left != 0)
+            strs.erase(s[left]);
+
+        while (right+1<len && !strs.count(s[right+1])) {
+            strs.insert(s[right+1]);
+            right++;
+        }
+        m = max(m, right-left+1);
+    }
+    return m;
+}
+
 int main(int argc, char** argv)
 {
     string str = "hello,world";
+    string window = "abcdcabdaabbc";
 
     Solution s;
     cout << "longest substring:" << s.longestSubstring(str) << endl;
 
+    cout << "max window size:" << s.slidewindow(window) << endl;
     return 0;
 }
