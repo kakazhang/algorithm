@@ -2,6 +2,7 @@ TARGET := LRU
 
 SRCDIRS := $(shell pwd)
 
+#SRCFILES := main.cpp list.cpp lru.cpp
 SRCFILES := $(foreach dir, $(SRCDIRS), $(wildcard $(dir)/*.cpp))
 
 FLAGS := -std=c++11

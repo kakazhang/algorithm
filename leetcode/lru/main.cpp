@@ -1,14 +1,10 @@
 #include <iostream>
 
 #include "list.h"
+#include "lru.h"
 
 using namespace std;
-
-typedef struct lrudata {
-    int val;
-    struct listnode item;
-} LruData, *pLruData;
-
+#if 1
 static struct listnode head;
 
 void iterate(struct listnode *list)
@@ -69,9 +65,51 @@ void listusage(int count)
     list_remove_all();
 }
 
+void lrucache()
+{
+    LruCache cache(4);
+
+    cache.put(1, 1);
+    int val = cache.get(1);
+    cout << "val(1)=" << val << endl;
+
+    cache.put(2, 2);
+    val = cache.get(2);
+    cout << "val(2)=" << val << endl;
+
+    cache.put(3, 3);
+    val = cache.get(3);
+    cout << "val(3)=" << val << endl;
+
+    cache.put(4, 4);
+    val = cache.get(4);
+    cout << "val(4)=" << val << endl;
+
+    cache.put(5, 5);
+    val = cache.get(5);
+    cout << "val(5)=" << val << endl;
+
+    cache.put(6, 6);
+    val = cache.get(6);
+    cout << "val(6)=" << val << endl;
+
+    cout << "val(1)=" << cache.get(1) << endl;
+    cout << "val(2)=" << cache.get(2) << endl;
+}
+
 int main(int argc, char** argv)
 {
-    listusage(10);
+    //listusage(10);
+    lrucache();
 
     return 0;
 }
+
+#else
+
+int main(int argc, char** argv)
+{
+    return 0;
+}
+
+#endif
